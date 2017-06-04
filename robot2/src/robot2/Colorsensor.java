@@ -12,15 +12,20 @@ public class Colorsensor extends AbstractFilter{
 		sample = new float[sampleSize];
 		
 	}
-	public boolean get_color(){
+	public string get_color(){
 		super.fetchSample(sample,0);
-		if(sample[0]>=0.35){
-			return WHITE;
+		string colorName = "";
+		switch((int)sample[0]){
+			case Color.NONE: colorName = "NONE"; break;//-1
+			case Color.BLACK: colorName = "BLACK"; break;//7
+			case Color.BLUE: colorName = "BLUE"; break;//2
+			case Color.GREEN: colorName = "GREEN"; break;//1
+			case Color.YELLOW: colorName = "YELLOW"; break;//3
+			case Color.RED: colorName = "RED"; break;//0
+			case Color.WHITE: colorName = "WHITE"; break;//6
+			case Color.BROWN: colorName = "BROWN"; break;//13
 		}
-		else{
-			return BLACK;
-		}
-		
+		return colorName;
 	}
 	
 	
