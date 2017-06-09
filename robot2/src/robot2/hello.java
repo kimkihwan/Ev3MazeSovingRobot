@@ -7,7 +7,7 @@ import java.rmi.RemoteException;
 import lejos.hardware.Brick;
 import lejos.hardware.BrickFinder;
 //import lejos.hardware.Sound;
-
+import lejos.hardware.lcd.LCD;
 //import lejos.hardware.sensor.SensorMode;
 import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.hardware.sensor.NXTLightSensor;
@@ -45,10 +45,33 @@ public class hello {
 		
 		init(ev3);
 		
-		light();
+		test(1);
+		
 		
 	}
 
+	public static void test(int i) throws RemoteException{
+		if(i==0)
+		{
+			while(true){
+				color();
+			}
+		}
+		else if(i==1)
+		{
+			while(true){
+				light();
+			}
+		}
+/*		else
+		{
+			while(true){
+				sonar();
+			}
+		}
+*/	}
+	
+	
 	public static void init(RemoteEV3 ev3) {	
 		//gets ports
 		ev3.getPort("A");
@@ -84,5 +107,10 @@ public class hello {
 		}
 	}
 	
+	public static void color() throws RemoteException {
+		String c;
+		c = color.get_color();
+		LCD.drawString(c + " \n ", 5, 5);
+	}
 }
 
