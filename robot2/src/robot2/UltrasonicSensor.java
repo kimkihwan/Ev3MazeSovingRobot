@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.port.SensorPort;
 import lejos.hardware.sensor.EV3UltrasonicSensor;
 import lejos.robotics.SampleProvider;
-import interfaces.RobotEventHandler;
-import interfaces.UltraSonicEvent;
+import robot2.RobotEventHandler;
+import robot2.UltraSonicEvent;
 
 
 public class UltrasonicSensor extends Thread {
@@ -42,16 +43,8 @@ public class UltrasonicSensor extends Thread {
 					ar.remove(0);
 				}
 				sample = getDistance();
-
-				ar.add(sample[0]);
-				if (isClose(maxDistance)) {
-					seh.eventHandle(new UltraSonicEvent());
-					try {
-						wait(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-					}
-				}
+				
+				LCD.drawString("distance - " + sample + " \n ", 20, 20);
 			}
 			try {
 				wait(30);
